@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => null, 'name' => null),
+	'from' => array('address' => Config::get('outgoing.email'), 'name' => Config::get('email.name')),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ return array(
 	|
 	*/
 
-//	'encryption' => 'ssl',
+	'encryption' => null,
 //	'encryption' => 'tls',
 
 	/*

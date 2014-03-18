@@ -1,7 +1,4 @@
-<?phpa
-
-Config::set('outgoing.email', 	'root@localhost');
-Config::set('email.name', 		'Laravel4');
+<?php
 
 return array(
 
@@ -42,7 +39,7 @@ return array(
 	|
 	*/
 
-	'timezone' => 'UTC',
+	'timezone' => 'America/Chicago',
 
 	/*
 	|--------------------------------------------------------------------------

@@ -33,7 +33,7 @@
 
 			$data = array('username' => $user->username);
 
-			Mail::send('emails.auth.newpassword', $data, function($message) use ($user)
+			Mail::send('emails.auth.welcome', $data, function($message) use ($user)
 			{
 
 				$message->to($user->email);
