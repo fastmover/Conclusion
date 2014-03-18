@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('title')
+	Signup
+@stop
+
 @section('sidebar')
     @parent
 
