@@ -69,7 +69,14 @@
 				<a href="/" class="list-group-item active">
 					Home
 				</a>
-				<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+				@if(!Auth::check())
+				<li>{{ HTML::link('register', 'Register', array('class' => 'list-group-item')) }}</li>
+				<li>{{ HTML::link('login', 'Login', array('class' => 'list-group-item')) }}</li>
+				@else
+				<li>{{ HTML::link('logout', 'logout', array('class' => 'list-group-item')) }}</li>
+				@endif
+				<a href="/register" class="list-group-item">Register</a>
+				<a href="/login" class="list-group-item">Login</a>
 				<a href="#" class="list-group-item">Morbi leo risus</a>
 				<a href="#" class="list-group-item">Porta ac consectetur ac</a>
 				<a href="#" class="list-group-item">Vestibulum at eros</a>

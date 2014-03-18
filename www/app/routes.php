@@ -15,4 +15,20 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
-Route::get('/sign-up', 'UserController@signUp');
+
+Route::get('/register', 'UserController@getRegister');
+
+Route::post('/register', 'UserController@postRegister');
+
+Route::get('/login', 'UserController@getLogin');
+
+Route::post('/login', 'UserController@postLogin');
+
+Route::get('/logout', 'UserController@getLogout');
+
+Route::get('/dashboard', 'UserController@getDashboard');
+
+
+
+
+
