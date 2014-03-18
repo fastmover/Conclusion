@@ -136,7 +136,6 @@
 
 		Mail::send('emails.auth.reset', $data, function($message) use ($user)
 		{
-			$message->from('us@example.com', 'Laravel');
 
 			$message->to($user->email);
 
@@ -165,8 +164,6 @@
 
 		Mail::send('emails.auth.newpassword', $data, function($message) use ($user)
 		{
-
-			$message->from('us@example.com', 'Laravel');
 
 			$message->to($user->email);
 

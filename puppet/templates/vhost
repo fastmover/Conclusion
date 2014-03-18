@@ -1,5 +1,7 @@
 <VirtualHost *:80>
 	DocumentRoot /var/www/public
+
+	SetEnv LARAVEL_ENV "dev"
 	
 	<Directory />
 		Options FollowSymLinks

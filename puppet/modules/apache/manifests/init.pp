@@ -35,12 +35,6 @@ class apache
             owner => root, group => root,
             source  => "/vagrant/puppet/templates/vhost",
             require => Package['apache2'],
-            setenv => {
-                'WORDPRESS_DB_USER' => 'awesome-project',
-                'WORDPRESS_DB_PASSWORD' => '@we5omE-pAs5w0rD',
-                'WORDPRESS_DB_HOST' => 'localhost',
-                'WORDPRESS_DB_NAME' => 'awesome-project.local'
-            }
     }
 
     exec 
