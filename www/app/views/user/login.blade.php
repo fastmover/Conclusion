@@ -34,6 +34,8 @@
 
 			{{ Form::submit('Login', array('class'=>'btn btn-large btn-primary btn-block'))}}
 
+			{{ HTML::link('/reset', 'Forgot Password', array()) }}
+
 		{{ Form::close() }}
     </div>
 @stop

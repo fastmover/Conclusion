@@ -16,17 +16,21 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
-Route::get('/register', 'UserController@getRegister');
+Route::get('register', 'UserController@getRegister');
 
-Route::post('/register', 'UserController@postRegister');
+Route::post('register', 'UserController@postRegister');
 
-Route::get('/login', 'UserController@getLogin');
+Route::get('login', 'UserController@getLogin');
 
-Route::post('/login', 'UserController@postLogin');
+Route::post('login', 'UserController@postLogin');
 
-Route::get('/logout', 'UserController@getLogout');
+Route::get('logout', 'UserController@getLogout');
 
-Route::get('/dashboard', 'UserController@getDashboard');
+Route::get('dashboard', 'UserController@getDashboard');
+
+Route::get('reset/{uid?}', 'UserController@getReset');
+
+Route::post('reset', 'UserController@postReset');
 
 
 

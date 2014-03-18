@@ -30,6 +30,8 @@ class CreateUsersTable extends Migration {
 
         Schema::dropIfExists('pages');
 
+		Schema::dropIfExists('reset');
+
         if (Schema::hasTable('users'))
         {
             Schema::create('pages', function($table)
@@ -41,7 +43,15 @@ class CreateUsersTable extends Migration {
                 $table->string('group')->default('public');
                 $table->timestamps();
             });
+
+			Schema::create('reset', function($table) {
+				$table->increments('id');
+				$table->integer('user_id')->references('id')->on('users');
+				$table->string('uuid', 25);
+				$table->timestamps();
+			});
         }
+
 	}
 
 	/**
@@ -51,8 +61,9 @@ class CreateUsersTable extends Migration {
 	 */
 	public function down()
 	{
-        Schema::drop('users');
-        Schema::drop('pages');
+        Schema::dropIfExists('users');
+        Schema::dropIfExists('pages');
+        Schema::dropIfExists('reset');
 		//
 	}
 
