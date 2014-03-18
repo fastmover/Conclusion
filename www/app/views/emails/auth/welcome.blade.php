@@ -7,7 +7,10 @@
 		<h2>Welcome.</h2>
 
 		<div>
-			Thank you for registering {{ $username }}.
+			<p>Thank you for registering {{ $username }}.</p>
+
+			<p>Please click the following link to verify your account: {{ URL::to('/verify', array($uuid)) }} </p>
+
 		</div>
 	</body>
 </html>

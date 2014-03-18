@@ -32,6 +32,8 @@ class CreateUsersTable extends Migration {
 
 		Schema::dropIfExists('reset');
 
+		Schema::dropIfExists('verify');
+
         if (Schema::hasTable('users'))
         {
             Schema::create('pages', function($table)
@@ -45,6 +47,13 @@ class CreateUsersTable extends Migration {
             });
 
 			Schema::create('reset', function($table) {
+				$table->increments('id');
+				$table->integer('user_id')->references('id')->on('users');
+				$table->string('uuid', 25);
+				$table->timestamps();
+			});
+
+			Schema::create('verify', function($table) {
 				$table->increments('id');
 				$table->integer('user_id')->references('id')->on('users');
 				$table->string('uuid', 25);

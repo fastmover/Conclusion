@@ -24,20 +24,23 @@
 
 			// validation has passed, save user in DB
 			$user = new User;
-
 			$user->username = 	Input::get('username');
 			$user->email = 		Input::get('email');
 			$user->password = 	Hash::make(Input::get('password'));
-
 			$user->save();
 
-			$data = array('username' => $user->username);
+			$uuid = $this->generateUUID(Verify);
+
+			$verify = new Verify;
+			$verify->user_id = $user->id;
+			$verify->uuid = $uuid;
+			$verify->save();
+
+			$data = array('username' => $user->username, 'uuid' => $uuid);
 
 			Mail::send('emails.auth.welcome', $data, function($message) use ($user)
 			{
-
 				$message->to($user->email);
-
 			});
 
 			return Redirect::to('login')->with('message', 'Thanks for registering!');
@@ -85,11 +88,24 @@
 		$this->layout->content = View::make('user.reset');
 	}
 
+	public function getVerify($uid) {
+
+		$uuid = Verify::where('uuid', $uid);
+		if($uuid != null) {
+			$user = User::where('id', $uuid->user_id);
+			$user->verified = 1;
+			$user->save();
+			$uuid->delete();
+			return Redirect::to('login')->with('message', 'Your Account is verified.');
+		} else {
+			return Redirect::to('login')->with('message', 'Invalid URL.');
+		}
+
+	}
+
 	public function postReset() {
 
 		$user = User::where('email', Input::get('email'))->first();
-
-
 
 		if($user == null) {
 			$user = User::where('username', Input::get('email'))->first();
@@ -127,7 +143,7 @@
 
 		}
 
-		$reset->uuid = $this->generateUUID();
+		$reset->uuid = $this->generateUUID(Reset);
 
 		$reset->save();
 
@@ -175,10 +191,10 @@
 
 	}
 
-	private function generateUUID() {
+	private function generateUUID($model) {
 		$uuid = uniqid('', true);
 
-		$test = Reset::where('uuid', $uuid);
+		$test = $model::where('uuid', $uuid);
 
 		if($test != null) {
 			return $uuid;
