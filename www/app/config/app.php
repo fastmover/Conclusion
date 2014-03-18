@@ -1,4 +1,7 @@
-<?php
+<?phpa
+
+Config::set('outgoing.email', 	'root@localhost');
+Config::set('email.name', 		'Laravel4');
 
 return array(
 

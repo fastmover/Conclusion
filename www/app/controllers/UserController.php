@@ -31,6 +31,15 @@
 
 			$user->save();
 
+			$data = array('username' => $user->username);
+
+			Mail::send('emails.auth.newpassword', $data, function($message) use ($user)
+			{
+
+				$message->to($user->email);
+
+			});
+
 			return Redirect::to('login')->with('message', 'Thanks for registering!');
 
 		} else {
@@ -156,9 +165,10 @@
 
 		Mail::send('emails.auth.newpassword', $data, function($message) use ($user)
 		{
+
 			$message->from('us@example.com', 'Laravel');
 
-			$message->to($user->email)->bcc('fastmoverr@gmail.com');
+			$message->to($user->email);
 
 		});
 
