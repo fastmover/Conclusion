@@ -16,10 +16,17 @@ module.exports = (grunt) ->
           {
             src: "www/vendor/twitter/bootstrap/dist/js/bootstrap.min.js"
             dest: "www/public/js/bootstrap.min.js"
-          }
+          },
           {
             src: "www/vendor/components/jquery/jquery.min.js"
             dest: "www/public/js/jquery.min.js"
+          },
+          {
+            flatten: true
+            expand: true
+            filter: 'isFile'
+            src: "www/vendor/twitter/bootstrap/dist/fonts/*"
+            dest: "www/public/fonts/"
           }
 
         ]

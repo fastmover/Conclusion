@@ -36,6 +36,10 @@ Route::get('verify/{uid?}', 'UserController@verify');
 
 Route::get('page/{slug?}', 'PageController@page');
 
+Route::get('admin', 'AdminController@dashboard');
+
+
+
 
 
 

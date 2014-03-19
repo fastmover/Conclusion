@@ -15,4 +15,8 @@ class BaseController extends Controller {
 		}
 	}
 
+	private function redirectTop() {
+		return Redirect::to('/');
+	}
+
 }
