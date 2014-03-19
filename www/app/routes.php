@@ -34,6 +34,10 @@ Route::post('reset', 'UserController@postReset');
 
 Route::get('verify/{uid?}', 'UserController@verify');
 
+Route::get('page/{slug?}', 'PageController@page');
+
+
+
 
 
 

@@ -60,10 +60,10 @@
 
 	public function postLogin() {
 		if (Auth::attempt(array('email'=>Input::get('email'), 'password'=>Input::get('password')))) {
-			return Redirect::to('dashboard')->with('message', 'You are now logged in!');
+			return Redirect::to('dashboard');
 		} else {
 			if (Auth::attempt(array('username'=>Input::get('email'), 'password'=>Input::get('password')))) {
-				return Redirect::to('dashboard')->with('message', 'You are now logged in!');
+				return Redirect::to('dashboard');
 			} else {
 				return Redirect::to('login')
 					->with('message', 'Your username/password combination was incorrect')

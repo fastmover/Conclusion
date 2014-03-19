@@ -14,18 +14,24 @@
     <div class="signup">
 		<ul>
 			@foreach($errors->all() as $error)
-			<li>{{ $error }}</li>
+			<li class="alert alert-danger">{{ $error }}</li>
 			@endforeach
 		</ul>
 
 		<div class="container">
 			@if(Session::has('message'))
-			<p class="alert">{{ Session::get('message') }}</p>
+			<p class="alert alert-warning">{{ Session::get('message') }}</p>
 			@endif
 		</div>
 
-		<h1>Hello {{ Auth::user()->username; }}</h1>
 
-		<p>Welcome to your Dashboard. You rock!</p>
+		<textarea name="content" id="content" cols="30" rows="10">
+			{{ $page->content or '' }}
+		</textarea>
     </div>
 @stop
+
+<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+<script>
+	tinymce.init({selector:'textarea'});
+</script>
