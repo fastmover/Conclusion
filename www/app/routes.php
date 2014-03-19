@@ -32,6 +32,8 @@ Route::get('reset/{uid?}', 'UserController@getReset');
 
 Route::post('reset', 'UserController@postReset');
 
+Route::get('verify/{uid?}', 'UserController@verify');
+
 
 
 

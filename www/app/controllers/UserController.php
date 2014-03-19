@@ -29,9 +29,11 @@
 			$user->password = 	Hash::make(Input::get('password'));
 			$user->save();
 
-			$uuid = $this->generateUUID(Verify);
-
 			$verify = new Verify;
+
+			$uuid = $this->generateUUID($verify);
+
+
 			$verify->user_id = $user->id;
 			$verify->uuid = $uuid;
 			$verify->save();
@@ -88,11 +90,12 @@
 		$this->layout->content = View::make('user.reset');
 	}
 
-	public function getVerify($uid) {
+	public function verify($uid) {
 
-		$uuid = Verify::where('uuid', $uid);
+		$uuid = Verify::where('uuid', $uid)->first();
+
 		if($uuid != null) {
-			$user = User::where('id', $uuid->user_id);
+			$user = User::where('id', $uuid->user_id)->first();
 			$user->verified = 1;
 			$user->save();
 			$uuid->delete();
