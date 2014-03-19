@@ -1,3 +1,28 @@
+# Conclusion
+## CMS written in Laravel
+This is my start to a cms type software written in Laravel. The original Repo for this was copied from:
+***
+git clone http://github.com/bryannielsen/Laravel4-Vagrant.git
+***
+The above repo is a Vagrant box setup with composer and Laravel. I have improved upon it by adding Grunt Task Runner, and other composer repos such as Twitter Bootstrap and jQuery. Currently the only grunt task setup properly is copy, which copies over the necessary files for jQuery and Twitter Bootstrap.
+
+This repository is a major work in progress, please don't judge just yet.  So far, in Laravel, I've gotten the basics for the User model setup.  Registration, email verification, user authentication - log in / log out, and password reset.
+
+Started setting up pages, but then decided it was necessary to setup an admin interface before getting too deep into this.  
+
+Started an admin interface and interaction, but this is the current major Work In Progress (WIP).
+
+***
+
+Below is the instructions from the original repo to set up this vagrant box. Please see instructions below to try this out.  After following the instructions provided below, log into the vagrant box `vagrant ssh`.  Navigate to the /var/www/ folder, and run the following commands:
+`composer update`
+`npm install`
+
+This will finalize and install any dependencies.
+
+***
+***
+
 # Laravel 4 w/ Vagrant
 
 A basic Ubuntu 12.04 Vagrant setup with [Laravel4](http://laravel.com/docs) and PHP 5.5.
@@ -12,7 +37,7 @@ PHP 5.4 w/ Apache 2.2 is available on the php54 branch.
 ## Setup
 
 
-* Clone this repository `git clone http://github.com/bryannielsen/Laravel4-Vagrant.git`
+* Clone this repository
 * run `vagrant up` inside the newly created directory
 * (the first time you run vagrant it will need to fetch the virtual box image which is ~300mb so depending on your download speed this could take some time)
 * Vagrant will then use puppet to provision the base virtual box with our LAMP stack (this could take a few minutes) also note that composer will need to fetch all of the packages defined in the app's composer.json which will add some more time to the first provisioning run
