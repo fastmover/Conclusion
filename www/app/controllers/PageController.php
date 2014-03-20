@@ -25,7 +25,10 @@ class PageController extends BaseController {
 
 	public function page($slug = null)
 	{
-		$page = Page::where('slug', $slug);
+
+		$page = Page::where('slug', $slug)->first();
+
+//		var_dump($page); exit;
 
 		if($page == null) {
 			$this->redirectTop();
@@ -35,12 +38,7 @@ class PageController extends BaseController {
 			$this->redirectTop();
 		}
 
-		$thisPage = array(
-			'content' 	=> $page->content,
-			'title'		=> $page->title
-		);
-
-		return View::make('hello')->with('page', $thisPage);
+		return View::make('pages.page')->with('page', $page);
 	}
 
 	public function edit($id = null) {

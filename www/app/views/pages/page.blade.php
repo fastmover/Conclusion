@@ -24,6 +24,15 @@
 			@endif
 		</div>
 
-		{{ $page->content or '' }}
+		@if($page->content != null)
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><a href="/page/{{ $page->slug }}">{{ $page->title }}</a></h3>
+			</div>
+			<div class="panel-body">
+				{{ $page->content }}
+			</div>
+		</div>
+		@endif
     </div>
 @stop
