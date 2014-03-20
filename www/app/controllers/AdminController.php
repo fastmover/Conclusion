@@ -17,17 +17,6 @@ class AdminController extends BaseController {
 
 	protected $layout = 'layouts.master';
 
-	public function __construct()
-	{
-
-		$this->beforeFilter('auth');
-
-		if(Auth::user()->role != "admin") {
-			return Redirect::to('/');
-		}
-
-	}
-
 	public function dashboard() {
 		$this->layout->content = View::make('admin.dashboard');
 	}

@@ -17,7 +17,13 @@ class PageController extends BaseController {
 
 	protected $layout = 'layouts.master';
 
-	public function page($slug = null);
+	public function pages()
+	{
+		$pages = Page::all();
+		return View::make('pages.pages')->with('pages', $pages);
+	}
+
+	public function page($slug = null)
 	{
 		$page = Page::where('slug', $slug);
 
@@ -34,7 +40,7 @@ class PageController extends BaseController {
 			'title'		=> $page->title
 		);
 
-		return View::make('hello')->with('page' => $thisPage);
+		return View::make('hello')->with('page', $thisPage);
 	}
 
 	public function edit($id = null) {

@@ -29,6 +29,23 @@ class UserTableSeeder extends Seeder {
 			'password'	=> Hash::make('asdfasdf'),
 			'role'		=> 'admin'
 		));
+
+		DB::table('pages')->delete();
+
+		Page::create(array(
+			'author_id' => 0,
+			'user_id'	=> 0,
+			'slug'		=> 'page1',
+			'title'		=> 'Page 1',
+			'content'	=> '<h1>This is Page 1</h1><p>Lorem Ipsum Dollar Amet.</p>'
+		));
+		Page::create(array(
+			'author_id' => 0,
+			'user_id'	=> 0,
+			'slug'		=> 'page2',
+			'title'		=> 'Page 2',
+			'content'	=> '<h1>This is Page 2</h1><p>Lorem Ipsum Dollar Amet.</p>'
+		));
 	}
 
 }

@@ -25,7 +25,7 @@
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					@if(Auth::check() and Auth::getUser()->role == "admin")
+					@if(Auth::check() and User::isAdmin())
 					<ul class="nav navbar-nav">
 						<li><a href="/admin">Admin</a></li>
 						<li class="dropdown">
@@ -68,14 +68,15 @@
 		<div class="col-md-3">
 			@section('sidebar')
 			<div class="list-group">
-				<a href="/" class="list-group-item active">
-					Home
-				</a>
+				<a href="/" class="list-group-item active">Home	</a>
+				@if(User::isAdmin())
+				{{ HTML::link('admin/pages', 'Pages', array('class' => 'list-group-item')) }}
+				@endif
 				@if(!Auth::check())
-				<li>{{ HTML::link('register', 'Register', array('class' => 'list-group-item')) }}</li>
-				<li>{{ HTML::link('login', 'Login', array('class' => 'list-group-item')) }}</li>
+				{{ HTML::link('register', 'Register', array('class' => 'list-group-item')) }}
+				{{ HTML::link('login', 'Login', array('class' => 'list-group-item')) }}
 				@else
-				<li>{{ HTML::link('logout', 'logout', array('class' => 'list-group-item')) }}</li>
+				{{ HTML::link('logout', 'logout', array('class' => 'list-group-item')) }}
 				@endif
 				<a href="/register" class="list-group-item">Register</a>
 				<a href="/login" class="list-group-item">Login</a>

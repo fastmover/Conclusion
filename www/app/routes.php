@@ -13,7 +13,7 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('index');
 });
 
 Route::get('register', 'UserController@getRegister');
@@ -36,10 +36,16 @@ Route::get('verify/{uid?}', 'UserController@verify');
 
 Route::get('page/{slug?}', 'PageController@page');
 
-Route::get('admin', 'AdminController@dashboard');
+Route::get('admin', array('before' => 'admin', 'uses' => 'AdminController@dashboard'));
 
+Route::get('admin/pages', array('before' => 'admin', 'uses' => 'PageController@pages'));
 
-
+Route::filter('admin', function () {
+	if (Auth::user()->role != 'admin') {
+		Session::flash('message', '<div class="alert alert-danger alert-dismissable center"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><h3>Ilegal operation detected!</h3></div>');
+		return Redirect::to('/');
+	}
+});
 
 
 

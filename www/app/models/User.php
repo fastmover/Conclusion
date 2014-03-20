@@ -56,4 +56,15 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->email;
 	}
 
+	public static function isAdmin() {
+		if(!Auth::check()) {
+			return false;
+		}
+
+		if(Auth::user()->role == "admin") {
+			return true;
+		}
+		return false;
+	}
+
 }

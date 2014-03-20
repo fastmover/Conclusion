@@ -23,10 +23,7 @@
 			<p class="alert">{{ Session::get('message') }}</p>
 			@endif
 		</div>
-		<h1>Hello {{ Auth::user()->username; }}</h1>
 
-		<p>Welcome to the Admin Dashboard. You rock!</p>
-
-
+		<p>Welcome to your Laravel!</p>
     </div>
 @stop
