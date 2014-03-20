@@ -70,6 +70,8 @@
 				</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
 		</nav>
+		@section('formstart')
+		@show
 		<div class="col-md-9">
 			@yield('content')
 		</div>
@@ -78,6 +80,8 @@
 
 			@show
 		</div>
+		@section('formend')
+		@show
 	</div>
 	</body>
 	<script type="text/javascript" src="/js/jquery.min.js"></script>

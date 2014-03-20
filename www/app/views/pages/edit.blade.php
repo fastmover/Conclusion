@@ -4,10 +4,40 @@
 	Signup
 @stop
 
+
+<?php
+if(isset($page)) {
+	$id			= $page->id;
+	$title 		= $page->title;
+	$slug 		= $page->slug;
+	$content 	= $page->content;
+	$author_id 	= $page->author_id;
+} else {
+	$id			= '';
+	$title 		= '';
+	$slug 		= '';
+	$content 	= '';
+	$author_id 	= '';
+}
+?>
+
+@section('formstart')
+{{ Form::open(array('url'=>'/page/save', 'class'=>'form-page-edit form-group')) }}
+@stop
+
+@section('formend')
+{{ Form::close() }}
+@stop
+
 @section('sidebar')
     @parent
-
-    <p>This is appended to the master sidebar.</p>
+	<div class="well">
+		{{ Form::label('slug', 'Slug') }}
+		{{ Form::text('slug', $slug, array('placeholder' => 'slug', 'class' => 'input-block-level form-control')) }}
+		<div class="well">
+			{{ Form::submit('Save', array('class'=>'btn btn-large btn-primary form-control'))}}
+		</div>
+	</div>
 @stop
 
 @section('content')
@@ -23,25 +53,19 @@
 			<p class="alert alert-warning">{{ Session::get('message') }}</p>
 			@endif
 		</div>
-		<?php
-			$title = isset($page) and $page->title or '';
-		?>
-		{{ Form::open(array('url'=>'/page/save', 'class'=>'form-page-edit form-group')) }}
+
 			<p>{{ Form::text('title', $title, array('class'=>'input-block-level form-control', 'placeholder'=>'Title')) }}</p>
 
 			<textarea name="content" id="content" cols="30" rows="10">
-				{{ $page->content or '' }}
+				{{ $content }}
 			</textarea>
 			<br/>
 			@if(isset($page) and $page->author_id != null)
-				{{ Form::hidden('author_id', $page->author_id) }}
+				{{ Form::hidden('author_id', $author_id) }}
 			@endif
 			@if(isset($page) and $page->id)
-				{{ Form::hidden('id', $page->id) }}
+				{{ Form::hidden('id', $id) }}
 			@endif
-			{{ Form::submit('Save', array('class'=>'btn btn-large btn-primary'))}}
-
-		{{ Form::close() }}
     </div>
 @stop
 
