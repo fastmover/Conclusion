@@ -41,21 +41,85 @@ class PageController extends BaseController {
 		return View::make('pages.page')->with('page', $page);
 	}
 
-	public function edit($id = null) {
-		if($id == null) {
+	public function edit($slug)
+	{
+		if($slug == null) {
 			$this->redirectTop();
 		}
-		$page = Page::where('id', $id);
+		$page = Page::where('slug', $slug)->first();
 
 		if($page == null) {
 			$this->redirectTop();
 		}
 
-
+		return View::make('pages.edit')->with('page', $page);
 
 	}
 
-	private function redirectTop() {
+	public function add() {
+		return View::make('pages.edit');
+	}
+
+	public function savePage()
+	{
+
+		$id = Input::get('id');
+		$author = Input::get('author_id');
+
+
+		if(
+			($author !== '') and
+			($id !== '')
+		) {
+			$page = Page::where('id', $id)->first();
+		} else {
+			$page = new Page;
+			$page->author_id	= Auth::user()->id;
+			$page->slug 		= $this->uniqueSlug(Str::slug($page->title));
+		}
+
+		$page->title 		= Input::get('title');
+		$page->content 		= Input::get('content');
+		$page->user_id		= Auth::user()->id;
+		$page->published 	= 1;
+		$page->save();
+
+		return Redirect::to('/page/' . $page->slug);
+
+	}
+
+	private function slugInUse($slug)
+	{
+
+		$page = Page::where('slug', $slug)->first();
+		if($page != null) {
+			return true;
+		}
+		return false;
+
+	}
+
+	private function uniqueSlug($slug)
+	{
+
+		if($this->slugInUse($slug))
+		{
+			$unique = false;
+			$increment = 1;
+			while(!$unique) {
+				if(!$this->slugInUse($slug . '-' . $increment)) {
+					$slug .= '-' . $increment;
+						$unique = true;
+				}
+				$increment++;
+			}
+		}
+		return $slug;
+
+	}
+
+	private function redirectTop()
+	{
 		return Redirect::to('/');
 	}
 

@@ -26,7 +26,12 @@
 			@foreach($pages as $page)
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title"><a href="/page/{{ $page->slug }}">{{ $page->title }}</a></h3>
+						<h3 class="panel-title">
+							<a href="/page/{{ $page->slug }}">{{ $page->title }}</a>
+							@if(Auth::user()->role == "admin")
+								<a class='pull-right' href="/page/edit/{{ $page->slug }}">Edit</a>
+							@endif
+						</h3>
 					</div>
 					<div class="panel-body">
 						{{ $page->content }}

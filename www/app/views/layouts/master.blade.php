@@ -70,7 +70,8 @@
 			<div class="list-group">
 				<a href="/" class="list-group-item active">Home	</a>
 				@if(User::isAdmin())
-				{{ HTML::link('admin/pages', 'Pages', array('class' => 'list-group-item')) }}
+				{{ HTML::link('pages', 'Pages', array('class' => 'list-group-item')) }}
+				{{ HTML::link('page/add', 'Add Page', array('class' => 'list-group-item')) }}
 				@endif
 				@if(!Auth::check())
 				{{ HTML::link('register', 'Register', array('class' => 'list-group-item')) }}
