@@ -24,7 +24,7 @@
 			@endif
 		</div>
 		<?php
-			$title = $page->title or '';
+			$title = isset($page) and $page->title or '';
 		?>
 		{{ Form::open(array('url'=>'/page/save', 'class'=>'form-page-edit form-group')) }}
 			<p>{{ Form::text('title', $title, array('class'=>'input-block-level form-control', 'placeholder'=>'Title')) }}</p>
@@ -33,10 +33,10 @@
 				{{ $page->content or '' }}
 			</textarea>
 			<br/>
-			@if($page and $page->author_id != null)
+			@if(isset($page) and $page->author_id != null)
 				{{ Form::hidden('author_id', $page->author_id) }}
 			@endif
-			@if($page and $page->id)
+			@if(isset($page) and $page->id)
 				{{ Form::hidden('id', $page->id) }}
 			@endif
 			{{ Form::submit('Save', array('class'=>'btn btn-large btn-primary'))}}

@@ -28,18 +28,23 @@
 					@if(Auth::check() and User::isAdmin())
 					<ul class="nav navbar-nav">
 						<li><a href="/admin">Admin</a></li>
+						@if(!Auth::check())
+						<li>{{ HTML::link('register', 'Register', array('class' => 'list-group-item')) }}</li>
+						<li>{{ HTML::link('login', 'Login', array('class' => 'list-group-item')) }}</li>
+						@endif
+						@if(Auth::user()->role == "admin")
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="#">Action</a></li>
-								<li><a href="#">Another action</a></li>
-								<li><a href="#">Something else here</a></li>
+								<li><a href="/pages">All Pages</a></li>
+								<li><a href="/page/add">Add Page</a></li>
 								<li class="divider"></li>
 								<li><a href="#">Separated link</a></li>
 								<li class="divider"></li>
 								<li><a href="#">One more separated link</a></li>
 							</ul>
 						</li>
+						@endif
 					</ul>
 					@endif
 					@if(Auth::check())
@@ -65,30 +70,13 @@
 				</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
 		</nav>
-		<div class="col-md-3">
-			@section('sidebar')
-			<div class="list-group">
-				<a href="/" class="list-group-item active">Home	</a>
-				@if(User::isAdmin())
-				{{ HTML::link('pages', 'Pages', array('class' => 'list-group-item')) }}
-				{{ HTML::link('page/add', 'Add Page', array('class' => 'list-group-item')) }}
-				@endif
-				@if(!Auth::check())
-				{{ HTML::link('register', 'Register', array('class' => 'list-group-item')) }}
-				{{ HTML::link('login', 'Login', array('class' => 'list-group-item')) }}
-				@else
-				{{ HTML::link('logout', 'logout', array('class' => 'list-group-item')) }}
-				@endif
-				<a href="/register" class="list-group-item">Register</a>
-				<a href="/login" class="list-group-item">Login</a>
-				<a href="#" class="list-group-item">Morbi leo risus</a>
-				<a href="#" class="list-group-item">Porta ac consectetur ac</a>
-				<a href="#" class="list-group-item">Vestibulum at eros</a>
-			</div>
-			@show
-		</div>
 		<div class="col-md-9">
 			@yield('content')
+		</div>
+		<div class="col-md-3">
+			@section('sidebar')
+
+			@show
 		</div>
 	</div>
 	</body>

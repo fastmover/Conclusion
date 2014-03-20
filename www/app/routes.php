@@ -40,8 +40,6 @@ Route::get('admin', array('before' => 'admin', 'uses' => 'AdminController@dashbo
 
 // Pages
 
-Route::get('page/{slug?}', 'PageController@page');
-
 Route::get('pages', array('before' => 'admin', 'uses' => 'PageController@pages'));
 
 Route::get('page/add', array('before' => 'admin', 'uses' => 'PageController@add'));
@@ -49,6 +47,8 @@ Route::get('page/add', array('before' => 'admin', 'uses' => 'PageController@add'
 Route::get('page/edit/{slug?}', array('before' => 'admin', 'uses' => 'PageController@edit'));
 
 Route::post('page/save', array('before' => 'admin', 'uses' => 'PageController@savePage'));
+
+Route::get('page/{slug?}', 'PageController@page');
 
 Route::filter('admin', function () {
 	if (Auth::user()->role != 'admin') {

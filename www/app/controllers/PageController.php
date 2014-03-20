@@ -68,17 +68,18 @@ class PageController extends BaseController {
 
 
 		if(
-			($author !== '') and
-			($id !== '')
+			($author and $author !== '') and
+			($id and $id !== '')
 		) {
 			$page = Page::where('id', $id)->first();
+			$page->title 		= Input::get('title');
 		} else {
 			$page = new Page;
 			$page->author_id	= Auth::user()->id;
+			$page->title 		= Input::get('title');
 			$page->slug 		= $this->uniqueSlug(Str::slug($page->title));
 		}
 
-		$page->title 		= Input::get('title');
 		$page->content 		= Input::get('content');
 		$page->user_id		= Auth::user()->id;
 		$page->published 	= 1;
